@@ -1,13 +1,30 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { globalStyles } from '../styles/global';
-
-export default function ReviewDetails({ navigation }) {
+import { StyleSheet, View, Text ,Image} from 'react-native';
+import { globalStyles,images } from '../styles/global';
+import Card from '../shared/card';
+ export default function ReviewDetails({ navigation }) {
+   const ratingKey=navigation.getParam('rating');
   return (
     <View style={globalStyles.container}>
-      <Text>{ navigation.getParam('title') }</Text>
-      <Text>{ navigation.getParam('body') }</Text>
-      <Text>{ navigation.getParam('rating') }</Text>
+      <Card>
+      <Text>Title:{"\n"}{ navigation.getParam('title') }</Text>
+      <Text>Info:{"\n"}{ navigation.getParam('body') }</Text>
+      {/* <Text>Rating:{"\n"}{ navigation.getParam('rating') }</Text> */}
+      <View style={styles.rating}>
+      <Text> Rating:</Text> 
+      <Image source={images.ratings[ratingKey]}/>
+      </View>
+       </Card>
     </View>
   );
 }
+const styles=StyleSheet.create({
+  rating:{
+    flexDirection:'row',
+    justifyContent:'center',
+    paddingTop:16,
+    marginTop:16,
+    borderTopWidth:1,
+    borderTopColor:'#B7B7B7'
+  }
+});

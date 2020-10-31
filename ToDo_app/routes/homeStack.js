@@ -1,22 +1,35 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import React from 'react';
+import Header from '../shared/header';
 import Home from '../screens/home';
 import ReviewDetails from '../screens/reviewDetails';
 
 const screens = {
   Home: {
     screen: Home,
-    navigationOptions: {
-      title: 'Todo List',
-      //headerStyle: { backgroundColor: '#eee' }
-    }
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: () => <Header title='Todo List' navigation={navigation} />
+      }
+    },
+    /**
+     *    navigationOptions: {
+     *title: 'Todo List',
+     * //headerStyle: { backgroundColor: '#eee' }
+     *}
+     * 
+     */
   },
   ReviewDetails: {
     screen: ReviewDetails,
-    navigationOptions: {
-      title: 'Review Details',
-      //headerStyle: { backgroundColor: '#eee' }
-    }
+    // navigationOptions: {
+    //   title: 'Review Details',
+    // }
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: () => <Header title='Review Details' navigation={navigation} />
+      }
+    },
   },
 };
 
@@ -24,9 +37,8 @@ const screens = {
 const HomeStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
     headerTintColor: '#444',
-    headerTitleAlign: 'center',
-    headerStyle: { backgroundColor: '#B7B7B7', height: 60 }
+    headerStyle: { backgroundColor: '#eee', height: 60 }
   }
 });
 
-export default createAppContainer(HomeStack);
+export default HomeStack;
