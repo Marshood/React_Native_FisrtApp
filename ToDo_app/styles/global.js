@@ -14,6 +14,15 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  input:{
+    padding:10,
+    margin:10,
+    paddingHorizontal:1,
+    borderWidth:1,
+    borderRadius:10,
+     textAlign:'center'
+
+  }
 });
 
 export const images =

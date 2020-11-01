@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, Modal } from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, FlatList, Modal } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Card from '../shared/card'
 import { MaterialIcons } from '@expo/vector-icons';
-
+import ReviewForm from './reviewForm'
 export default function Home({ navigation }) {
   const [reviews, setReviews] = useState([
     { title: 'Zelda, Breath of Fresh Air', rating: 5, body: 'lorem ipsum', key: '1' },
@@ -15,22 +15,38 @@ export default function Home({ navigation }) {
   ]);
 
   const [modalOpen, setModalOpen] = useState(false)
+  function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+  const addTodo = (newTodo) => {
+    newTodo.key = makeid(5)
+    console.log("newTodo", newTodo)
+    setReviews((currentTodo) => {
+      return [newTodo, ...currentTodo];
+    })
+    setModalOpen(false)
+  }
   return (
     <View style={globalStyles.container}>
-
       <Modal visible={modalOpen} animationType='slide'>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styless.modalContent}>
+            <MaterialIcons
+              name='close'
+              size={24}
+              style={{ ...styless.modalToggle, ...styless.modalClose }}
+              onPress={() => setModalOpen(false)}
+            />
 
-        <View style={styless.modalContent}>
-          <MaterialIcons
-            name='close'
-            size={24}
-            style={{ ...styless.modalToggle, ...styless.modalClose }}
-            onPress={() => setModalOpen(false)}
-          />
-          <Text>
-            Hello
-          </Text>
-        </View>
+            <ReviewForm addTodo={addTodo} />
+          </View>
+        </TouchableWithoutFeedback>
 
       </Modal>
 
