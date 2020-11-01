@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, TextInput, Button }
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import FlatButton from '../shared/button.js';
 
 const reviewSchema = yup.object({
     title: yup.string()
@@ -44,7 +45,7 @@ export default function ReviewForm({ addTodo }) {
                                 onBlur={formikProps.handleBlur('title')}
                             />
                             <Text style={globalStyles.errorText}>
-                                {formikProps.touched.title&&formikProps.errors.title}
+                                {formikProps.touched.title && formikProps.errors.title}
                             </Text>
                             <TextInput
                                 style={globalStyles.input}
@@ -55,7 +56,7 @@ export default function ReviewForm({ addTodo }) {
 
                             />
                             <Text style={globalStyles.errorText}>
-                                {formikProps.touched.body&&formikProps.errors.body}
+                                {formikProps.touched.body && formikProps.errors.body}
                             </Text>
                             <TextInput
                                 style={globalStyles.input}
@@ -67,13 +68,15 @@ export default function ReviewForm({ addTodo }) {
 
                             />
                             <Text style={globalStyles.errorText}>
-                                {formikProps.touched.rating&&formikProps.errors.rating}
+                                {formikProps.touched.rating && formikProps.errors.rating}
                             </Text>
-                            <Button
+                            {/* <Button
                                 title='submit'
                                 color='maroon'
                                 onPress={formikProps.handleSubmit}
-                            />
+                            /> */}
+                            <FlatButton onPress={formikProps.handleSubmit} text='submit' />
+
                         </View>
                     )
                 }
