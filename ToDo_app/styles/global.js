@@ -22,6 +22,13 @@ export const globalStyles = StyleSheet.create({
     borderRadius:10,
      textAlign:'center'
 
+  },
+  errorText:{
+    color:'#AC0404',
+    fontWeight:'bold',
+    marginTop:6,
+    marginBottom:10,
+    textAlign:'center'
   }
 });
 
